@@ -20,10 +20,6 @@ cable <- read_csv("bdc_04_Cable_fixed_broadband_D23_14may2024.csv")
 fcc <- bind_rows(cable, copper, fiber, GSO_sat, LBR_FW, L_FW, NGSO_sat, other, Un_FW)
 ```
 
-<details>
-<summary>Example: Code inside dropdown</summary>
-<code>function <- test</code>
-</details>
 
 ---
 Last Edit: 🕔21:01
