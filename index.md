@@ -22,8 +22,8 @@ fcc <- bind_rows(cable, copper, fiber, GSO_sat, LBR_FW, L_FW, NGSO_sat, other, U
 
 <details>
 <summary>Example</summary>
-<pre>This dropdown contains<br>a code block!
-</pre>
+<pre><code>This dropdown contains<br>a code block!
+</code></pre>
 </details>
 
 ---
