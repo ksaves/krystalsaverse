@@ -12,8 +12,7 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
 
 <sub>Download R Code here [broadband_availability_data_in_R.pdf](https://github.com/ksaves/krystalsaverse.github.io/blob/master/pdf/broadband_availability_data_in_R.pdf)</sub>
 
-<details>
-  <summary><h5>See R Code Here!<h5></summary>
+<details><summary><h5>See R Code Here!<h5></summary>
     
    <details>
     <summary><h7>Introduction<h7></summary>
