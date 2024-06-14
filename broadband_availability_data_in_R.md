@@ -451,6 +451,7 @@ left_join(county_h3, h3_summary, join_by(h3_address == h3_res8_id)) %>%
 <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Maricopa _County.png" width="300" height="300"/>
 
 Note: Manually creating a map for each county may be very time consuming. Instead, we can use a _for loop_ to create maps for each county. 
+
 <br>
 
 ---
@@ -494,4 +495,6 @@ for (i in 1:nrow(counties)) {
 # CHECK WORKING DIRECTORY FOLDER FOR SAVED COUNTY PLOTS
 getwd()
 ```
+
+<img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Apache _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Cochise _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Coconino _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Gila _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Graham _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Greenlee _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ La Paz _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Maricopa _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Mohave _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Navajo _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Pima _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Pinal _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Santa Cruz _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Yavapai _County.png" width="200" height="200" />
 
