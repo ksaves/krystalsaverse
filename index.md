@@ -24,7 +24,6 @@ fcc <- bind_rows(cable, copper, fiber, GSO_sat, LBR_FW, L_FW, NGSO_sat, other, U
     <summary>There's code inside this dropdown...</summary>
     <br>
     
-    This is how you add `code` in a dropdown:
     ```javascript
     console.log("Hello, world!");
     ```
