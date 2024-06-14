@@ -13,7 +13,7 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
 <sub>Download R Code here [broadband_availability_data_in_R.pdf](https://github.com/ksaves/krystalsaverse.github.io/blob/master/pdf/broadband_availability_data_in_R.pdf)</sub>
 
 <details closed>
-  <summary><h5>See R Code Here!<h5></summary>
+  <summary><h5>See R Code Here!
     
   - <details>
     <summary>Introduction</summary>
@@ -553,6 +553,7 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Apache _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Cochise _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Coconino _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Gila _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Graham _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Greenlee _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ La Paz _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Maricopa _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Mohave _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Navajo _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Pima _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Pinal _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Santa Cruz _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Yavapai _County.png" width="200" height="200" />
     
     </details>
+  <h5></summary>
     
 </details>
 
