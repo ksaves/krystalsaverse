@@ -20,22 +20,13 @@ cable <- read_csv("bdc_04_Cable_fixed_broadband_D23_14may2024.csv")
 fcc <- bind_rows(cable, copper, fiber, GSO_sat, LBR_FW, L_FW, NGSO_sat, other, Un_FW)
 ```
 
-<details>
-  
-  <summary>There's code inside this dropdown...</summary>
-  
-```
-
+```python
 print("Hello, world!")
-
 ```
-
-</details>
-
 
 
 
 ---
-Last Edit: 🕔20:13
+Last Edit: 🕔20:16
 <p style="font-size:11px">Page template forked from <a href="https://github.com/evanca/quick-portfolio">evanca</a></p>
 <!-- Remove above link if you don't want to attibute -->
