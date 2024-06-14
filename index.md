@@ -49,7 +49,7 @@ fcc_bsl_status <- fcc %>%
 
 Exploring 5, 10, 15 minute walksheds and bikesheds to Career Centers in Phoenix, AZ
 
-<img src="PosterPresentation_Walk_and_Bike_sheds_for_Phoenix.png"/>
+<img src="images/PosterPresentation_Walk_and_Bike_sheds_for_Phoenix.png"/>
 
 <sub>Check out the [ArcGIS StoryMap](https://storymaps.arcgis.com/stories/1b23c0736c6140bebdc5611bc529a1d4)</sub>
 
