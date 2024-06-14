@@ -23,8 +23,8 @@ fcc <- bind_rows(cable, copper, fiber, GSO_sat, LBR_FW, L_FW, NGSO_sat, other, U
 <details>
   <summary>There's code inside this dropdown...</summary>
   
-    ```
-    print("Hello, world!")
+  ```
+  print("Hello, world!")
     ```
   
 </details>
