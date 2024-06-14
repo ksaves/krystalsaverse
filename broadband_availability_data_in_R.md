@@ -2,10 +2,7 @@
 ## WORKING WITH FCC BROADBAND AVAILABILITY DATA IN ARIZONA USING R. 
 
 The following code uses FCC broadband availability data to determine the status (i.e., unserved, underserved, served) of broadband servicable locations (BSL). 
-Arizona is the primary state of analysis, however, this code can be used for any state with Census and BDC data!
-Sections of the code where these changes can be made have been annotated. 
-
-The following code uses FCC Broadband Availability Data to determine the status (i.e., unserved, underserved, served) of broadband servicable locations (BSL). Arizona is the primary state for this analysis, however, this code can be used for any state!
+Arizona is the primary state of analysis, however, this code can be used for any state with Census and BDC data! Sections of the code where these changes can be made have been annotated.
 
 The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyverse.org/) packages are used to summarize the total number of unserved, underserved, and served locations within a particular geometry. The FCC Broadband Availability data is publicly available and can be downloaded at [_broadbandmap.fcc.gov_](https://broadband.fcc.gov). The dataset does not contain latitude/longitude information and cannot be mapped at the household level without a [CostQuest](https://www.costquest.com/resources/articles/broadband-policy/fcc-fabric-license-available-for-academic-broadband-research/) license. Instead, this analysis uses the H3 Hexagonal Grid and Census Block information included in the publicly available data. The [_tigris_](https://github.com/walkerke/tigris) package is used to directly download and use U.S. Census Bureau [TIGER/Line](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html) spatial features (i.e., blocks, block groups, and counties). The [_h3jsr_](https://obrl-soil.github.io/h3jsr/) package is used to create [H3](https://h3geo.org/docs/core-library/overview/) Hexagonal Grids covering the entire state of Arizona. 
 
@@ -13,19 +10,21 @@ The [_ggplot2_](https://ggplot2.tidyverse.org/) package is used to map the perce
 
 
 <details open>
-<summary>Sections:</summary>
-<ul><li>1. Import the FCC Broadband Availability Data</li>
-<li>2. Combine FCC Technology Files</li>
-<li>3. Explore Dataset</li>
-<li>4. Determine Location Status (i.e., unserved, underserved, served)</li>
-<li>5. Count Locations and Status per Census Geometry</li>
-<li>6. Optional: Export Table Data</li>
-<li>7. Create Choropleth Maps Using _ggplot2_</li>
-<li>8. Count Locations and Status per H3 Hexagonal Grid</li>
-<li>9. Create Choropleth Maps of H3 Status Using _ggplot2_</li>
-<li>10. Map the Percentage of Served Locations per H3 for all Counties</li></ul>
+<summary><h4>This analysis is broken into the following sections:</h4></summary>
+  <ul><li>1. Import the FCC Broadband Availability Data</li>
+  <li>2. Combine FCC Technology Files</li>
+  <li>3. Explore Dataset</li>
+  <li>4. Determine Location Status (i.e., unserved, underserved, served)</li>
+  <li>5. Count Locations and Status per Census Geometry</li>
+  <li>6. Optional: Export Table Data</li>
+  <li>7. Create Choropleth Maps Using _ggplot2_</li>
+  <li>8. Count Locations and Status per H3 Hexagonal Grid</li>
+  <li>9. Create Choropleth Maps of H3 Status Using _ggplot2_</li>
+  <li>10. Map the Percentage of Served Locations per H3 for all Counties</li></ul>
 </details>
 <br>
+
+---
 
 #### 1. Import the FCC Broadband Availability Data
 
@@ -43,10 +42,13 @@ library(readr)
 ?dplyr
 ?tidyr
 ```
-Download FCC BDC Data. Steps Below:
-1. Go to the [FCC National Broadband Map](https://broadbandmap.fcc.gov/data-download)
-2. In the FCC portal, Select State, and download all fixed technologies.
-3. Unzip files
+
+<details open>
+<summary><h4>Download FCC Broadband Availability Data:<h4></summary>
+<ul><li>Go to the [FCC National Broadband Map](https://broadbandmap.fcc.gov/data-download)</li>
+<li>In the FCC portal, Select State, and download all fixed technologies.</li>
+<li>Unzip files</li></ul>
+</details>
 
 ```r
 # PRINT CURRENT WORKING DIRECTORY
@@ -71,7 +73,9 @@ Un_FW <- read_csv("bdc_04_UnlicensedFixedWireless_fixed_broadband_D23_14may2024.
 ```
 <br>
 
-### 2. Combine FCC Technology Files
+---
+
+#### 2. Combine FCC Technology Files
 
 ```r
 # BIND ALL ROWS
@@ -82,4 +86,256 @@ fcc <- bind_rows(cable, copper, fiber, GSO_sat, LBR_FW,
 rm(cable, copper, fiber, GSO_sat, LBR_FW, 
    L_FW, NGSO_sat, other, Un_FW)
 ```
+<br>
 
+---
+
+#### 3. Explore Dataset
+
+Note: Data Specs found here: https://us-fcc.box.com/v/bdc-data-downloads-output
+
+```r
+# VIEW THE DATA OR VIEW THE TRANSPOSED DATA
+fcc
+glimpse(fcc)
+
+# VIEW COLUMN HEADERS (I.E., NAMES)
+names(fcc)
+
+# RETURNS THE NUMBER OF UNIQUE LOCATION IDS
+length(unique(fcc$location_id))
+
+# RETURNS ALL UNIQUE ELEMENTS IN A COLUMN
+unique(fcc$business_residential_code)
+```
+<br>
+
+---
+
+#### 4. Determine Location Status (i.e., unserved, underserved, served)
+
+```r
+# DETERMINE LOCATION STATUS
+fcc_bsl_status <- fcc %>%
+  mutate(num_status = if_else(low_latency == 0 | 
+                            max_advertised_download_speed < 25 | 
+                            max_advertised_upload_speed < 3 |
+                            technology %in% c(0, 60, 61, 70), 0, # UNSERVED
+                          if_else(low_latency == 1 & 
+                                    (between(max_advertised_download_speed, 25, 99) | 
+                                    between(max_advertised_upload_speed, 3, 19)) &
+                                    technology %in% c(10, 40, 50, 71, 72), 1, # UNDERSERVED
+                          if_else(low_latency == 1 & 
+                                    max_advertised_download_speed >= 100 & 
+                                    max_advertised_upload_speed >= 20 &
+                                    technology %in% c(10, 40, 50, 71, 72), 2, NA)))) %>% # SERVED
+  group_by(location_id, block_geoid, h3_res8_id) %>%
+  summarise(status = as.character(max(num_status))) %>%
+  ungroup() %>%
+  mutate(status = if_else(status == 0, "unserved", 
+                          if_else(status == 1, "underserved",
+                                  if_else(status == 2, "served", NA))))
+
+# COUNT TOTAL LOCATIONS AND STATUS
+fcc_bsl_status %>%
+  group_by(status) %>%
+  summarise(count = n()) 
+```
+<br>
+
+---
+
+#### 5. Count Locations and Status per Census Geometry 
+
+```r
+# USE TIGER/LINE DATA FROM US CENSUS BUREAU IN R USING 'TIGRIS'
+
+# INSTALL PACKAGE
+install.packages("tigris")
+
+# LOAD PACKAGE
+library(tigris)
+
+# VIEW PACKAGE HELP
+?tigris
+
+# NOTE: DEFAULT CRS FOR ALL TIGRIS GEOMETRIES IS NAD 1983 (EPSG: 4269)
+
+# DOWNLOAD TIGER/LINE GEOMETRIES (COUNTIES, BLOCK GROUPS, BLOCKS)
+counties <- counties(state = "AZ", # USE TWO-DIGIT FIPS CODE OR TWO-CHAR STRING FOR STATE
+                           cb = FALSE, 
+                           year = 2023)
+
+block_groups <- block_groups(state = "AZ", # USE TWO-DIGIT FIPS CODE OR TWO-CHAR STRING FOR STATE
+                             county = counties$COUNTYFP,
+                             cb = FALSE,
+                             year = 2023)
+
+blocks <- blocks(state = "AZ", # USE TWO-DIGIT FIPS CODE OR TWO-CHAR STRING FOR STATE
+                 county = counties$COUNTYFP,
+                 year = 2023)
+
+# VERIFY CLASS OF R OBJECTS
+class(counties)
+```
+```r
+# COUNT LOCATION AND STATUS PER COUNTY
+counties_summary <- fcc_bsl_status %>%
+  mutate(geoid = substr(block_geoid, start = 1, stop = 5)) %>%
+  left_join(counties, join_by(geoid == GEOID)) %>% 
+  group_by(NAME, status) %>% 
+  summarise(count = n()) %>%
+  pivot_wider(names_from = status, names_prefix = "count_", values_from = count, values_fill = 0) %>%
+  mutate(perc_unserved = round(count_unserved/(count_unserved + count_underserved + count_served) *100),
+         perc_underserved = round(count_underserved/(count_unserved + count_underserved + count_served) *100),
+         perc_not_served = round((count_unserved + count_underserved) / (count_unserved + count_underserved + count_served) *100),
+         perc_served = round(count_served/(count_unserved + count_underserved + count_served) *100)) 
+```
+```r
+# COUNT LOCATION AND STATUS PER BLOCK GROUP
+block_groups_summary <- fcc_bsl_status %>%
+  mutate(geoid = substr(block_geoid, start = 1, stop = 12)) %>%
+  left_join(block_groups, join_by(geoid == GEOID)) %>% 
+  group_by(geoid, status) %>% 
+  summarise(count = n()) %>%
+  pivot_wider(names_from = status, names_prefix = "count_", values_from = count, values_fill = 0) %>%
+  mutate(perc_unserved = round(count_unserved/(count_unserved + count_underserved + count_served) *100),
+         perc_underserved = round(count_underserved/(count_unserved + count_underserved + count_served) *100),
+         perc_not_served = round((count_unserved + count_underserved) / (count_unserved + count_underserved + count_served) *100),
+         perc_served = round(count_served/(count_unserved + count_underserved + count_served) *100))
+
+# COUNT LOCATION AND STATUS PER BLOCK
+blocks_summary <- fcc_bsl_status %>%
+  left_join(blocks, join_by(block_geoid == GEOID20), multiple = "all") %>%
+  group_by(block_geoid, status) %>% 
+  summarise(count = n()) %>%
+  pivot_wider(names_from = status, names_prefix = "count_", values_from = count, values_fill = 0) %>%
+  mutate(perc_unserved = round(count_unserved/(count_unserved + count_underserved + count_served) *100),
+         perc_underserved = round(count_underserved/(count_unserved + count_underserved + count_served) *100),
+         perc_not_served = round((count_unserved + count_underserved) / (count_unserved + count_underserved + count_served) *100),
+         perc_served = round(count_served/(count_unserved + count_underserved + count_served) *100))
+
+# VERIFY CLASS OF R OBJECTS
+class(counties_summary)
+```
+<br>
+
+---
+
+#### 6. Optional: Export Table Data
+```r
+# GET THE WORKING DIRECTORY
+getwd() # THIS IS THE LOCATION FILES WILL BE SAVED
+
+# EXPORT TABLES TO CSV
+write_csv(fcc, "bdc_fixed_broadband_Dec23_updated14may2024_out05302024.csv")
+write_csv(fcc_bsl_status, "bsl_status_from_bdc_fixed_broadband_Dec23_updated14may2024_out05302024.csv")
+write_csv(counties_summary, "county_summary_from_bdc_fixed_broadband_Dec23_updated14may2024_out05302024.csv")
+write_csv(block_groups_summary, "block_group_summary_bdc_fixed_broadband_Dec23_updated14may2024_out05302024.csv")
+write_csv(blocks_summary, "block_summary_from_bdc_fixed_broadband_Dec23_updated14may2024_out05302024.csv")
+```
+<br>
+
+---
+
+#### 7. Create Choropleth Maps Using _ggplot2_
+```r
+# INSTALL GGPLOT2 PACKAGE
+install.packages("ggplot2")
+
+# LOAD PACKAGE
+library(ggplot2)
+
+# VIEW PACKAGE HELP
+?ggplot2
+```
+```r
+# MAP PERCENTAGE OF SERVED LOCATIONS BY COUNTY
+left_join(counties, counties_summary, join_by(NAME)) %>% 
+  ggplot() +
+  geom_sf(mapping = aes(geometry = geometry, fill = perc_served)) +
+  scale_fill_distiller(type = "seq",
+                       palette = "Blues",
+                       direction = 1,
+                       na.value = "grey") + 
+  labs(title = "Percentage of Served Locations by County",
+       caption = "Note to reader: NA values shown in grey \nData Source: FCC Broadband Data Collection (31 Dec 2023)",
+       fill = "Percentage") + 
+  theme_void() + 
+  theme(plot.background = element_rect(fill = "white", color = NA),
+        plot.margin = margin(0.5, 0.5, 0.5, 0.5, "in"),
+        plot.title = element_text(hjust = 0.5, vjust = 0.5),
+        plot.caption = element_text(hjust = 0.5, vjust = 0.5))
+
+# OPTIONAL: SAVE MAP AS PNG
+ggsave("Map_of_Percentage_of_Served_Locations_by_County.png",
+       plot = last_plot(),
+       width = 6,
+       height = 6,
+       units = "in",
+       dpi = 600)
+```
+```r
+# MAP PERCENTAGE OF SERVED LOCATIONS BY BLOCK GROUP
+left_join(block_groups, block_groups_summary, join_by(GEOID == geoid)) %>% 
+  ggplot() +
+  geom_sf(mapping = aes(geometry = geometry, fill = perc_served), color = NA) +
+  #geom_sf(data = counties, mapping = aes(geometry = geometry), fill = NA, linewidth = 0.5) + # OPTIONAL: ADD COUNTY BOUNDARIES
+  scale_fill_distiller(type = "seq",
+                       palette = "Blues",
+                       direction = 1,
+                       na.value = "grey") + 
+  labs(title = "Percentage of Served Locations by Census Block Group",
+       caption = "Note to reader: NA values shown in grey \nData Source: FCC Broadband Data Collection (31 Dec 2023), U.S. Census Bureau",
+       fill = "Percentage") + 
+  theme_void() + 
+  theme(plot.background = element_rect(fill = "white", color = NA),
+        plot.margin = margin(0.5, 0.5, 0.5, 0.5, "in"),
+        plot.title = element_text(hjust = 0.5, vjust = 0.5),
+        plot.caption = element_text(hjust = 0.5, vjust = 0.5))
+
+# OPTIONAL: SAVE MAP AS PNG
+ggsave("Map_of_Percentage_of_Served_Locations_by_BlockGroup.png",
+       plot = last_plot(),
+       width = 6,
+       height = 6,
+       units = "in",
+       dpi = 600)
+```
+```r
+# MAP PERCENTAGE OF SERVED LOCATIONS BY BLOCK
+left_join(blocks, blocks_summary, join_by(GEOID20 == block_geoid)) %>% 
+  ggplot() +
+  geom_sf(mapping = aes(geometry = geometry, fill = perc_served), color = NA) +
+  #geom_sf(data = counties, mapping = aes(geometry = geometry), fill = NA, linewidth = 0.5) + # OPTIONAL: ADD COUNTY BOUNDARIES
+  scale_fill_distiller(type = "seq",
+                       palette = "Blues",
+                       direction = 1,
+                       na.value = "grey") +
+  labs(title = "Percentage of Served Locations by Census Block",
+       caption = "Note to reader: NA values shown in grey \nData Source: FCC Broadband Data Collection (31 Dec 2023), U.S. Census Bureau",
+       fill = "Percentage") + 
+  theme_void() + 
+  theme(plot.background = element_rect(fill = "white", color = NA),
+        plot.margin = margin(0.5, 0.5, 0.5, 0.5, "in"),
+        plot.title = element_text(hjust = 0.5, vjust = 0.5),
+        plot.caption = element_text(hjust = 0.5, vjust = 0.5))
+
+# OPTIONAL: SAVE MAP AS PNG
+ggsave("Map_of_Percentage_of_Served_Locations_by_Block.png",
+       plot = last_plot(),
+       width = 6,
+       height = 6,
+       units = "in",
+       dpi = 600)
+```
+<br>
+
+---
+
+#### 8. Count Locations and Status per H3 Hexagonal Grid
+
+
+
+#### 9. Create Choropleth Maps of H3 Status Using _ggplot2_
+#### 10. Map the Percentage of Served Locations per H3 for all Counties
