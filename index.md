@@ -12,12 +12,13 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
 
 <sub>Download R Code here [broadband_availability_data_in_R.pdf](https://github.com/ksaves/krystalsaverse.github.io/blob/master/pdf/broadband_availability_data_in_R.pdf)</sub>
 
-<details><summary><h5>See R Code Here!<h5></summary>
+<details>
+    <summary><h5>See R Code Here!<h5></summary>
     
    <details>
-    <summary><h7>Introduction<h7></summary>
-   
-    ```r
+    <summary>Introduction</summary>
+       
+    ```
     #####################################################
     # WORKING WITH FCC BROADBAND AVAILABILITY DATA IN 
     # ARIZONA USING R. 
@@ -59,9 +60,9 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     </details>
     
    <details>
-    <summary>1. Import FCC Broadband Availability Data</summary>
+       <summary>1. Import FCC Broadband Availability Data</summary>
     
-    ```r
+    ```
     #####################################################
     # 1. IMPORT FCC BROADBAND AVAILABILITY DATA
     #####################################################
@@ -106,9 +107,9 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     </details>
 
    <details>
-    <summary>2. Combine FCC Technology</summary>
+       <summary>2. Combine FCC Technology</summary>
 
-    ```r
+    ```
     #####################################################
     # 2. COMBINE FCC TECHNOLOGY FILES
     #####################################################
@@ -124,9 +125,9 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     </details>
 
    <details>
-    <summary>3. Explore Dataset</summary>
+       <summary>3. Explore Dataset</summary>
 
-    ```r
+    ```
     #####################################################
     # 3. EXPLORE DATASET
     #####################################################
@@ -149,9 +150,9 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     </details>
 
    <details>
-    <summary>4. Determine Location Status (i.e., unserved, underserved, served)</summary>
+       <summary>4. Determine Location Status (i.e., unserved, underserved, served)</summary>
 
-    ```r
+    ```
     #####################################################
     # 4. DETERMINE LOCATION STATUS (I.E., UNSERVED, UNDERSERVED, SERVED) (See BEAD NOFO, pages 16-17)
     #####################################################
@@ -185,9 +186,9 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     </details>
     
    <details>
-    <summary>5. Count Locations and Status Per Census Geometry</summary>
+       <summary>5. Count Locations and Status Per Census Geometry</summary>
 
-    ```r
+    ```
     #####################################################
     # 5. COUNT LOCATIONS AND STATUS PER GEOMETRY
     # USE TIGER/LINE DATA FROM US CENSUS BUREAU IN R USING 'TIGRIS'
@@ -262,9 +263,9 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     </details>
     
    <details>
-    <summary>6. Export Data</summary>
+       <summary>6. Export Data</summary>
 
-    ```r
+    ```
     #####################################################
     # 6. OPTIONAL: EXPORT DATA
     #####################################################
@@ -282,9 +283,9 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     </details>
 
    <details>
-    <summary>7. Create Choropleth Maps Using 'ggplot2'</summary>
+       <summary>7. Create Choropleth Maps Using 'ggplot2'</summary>
 
-    ```r
+    ```
     #####################################################
     # 7. CREATE CHOROPLETH MAPS USING GGPLOT2
     #####################################################
@@ -378,9 +379,9 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     </details>
     
    <details>
-    <summary>8. Count Locations and Status Per H3 Hexagonal Grid</summary>
+       <summary>8. Count Locations and Status Per H3 Hexagonal Grid</summary>
 
-    ```r
+    ```
     #####################################################
     # 8. COUNT LOCATIONS AND STATUS PER HEX BIN
     #####################################################
@@ -427,9 +428,9 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     </details>
 
    <details>
-    <summary>9. Create Choropleth Maps of H3 Hexagonal Bins Using 'ggplot2'</summary>
+       <summary>9. Create Choropleth Maps of H3 Hexagonal Bins Using 'ggplot2'</summary>
 
-    ```r
+    ```
     #####################################################
     # 9. CREATE CHOROPLETH MAPS OF HEX STATUS USING 'GGPLOT2'
     #####################################################
@@ -500,9 +501,9 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     </details>
 
    <details>
-    <summary>10. Map the Percentage of Served Locations Per H3 for All Counties</summary>
+       <summary>10. Map the Percentage of Served Locations Per H3 for All Counties</summary>
 
-    ```r
+    ```
     #####################################################
     # 10. MAP PERCENTAGE OF SERVED LOCATIONS IN H3 FOR ALL COUNTIES
     #####################################################
@@ -547,7 +548,7 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     </details>
 
    <details>
-    <summary>County Choropleth Maps of H3 Hexagonal Grids (from previous step!)</summary>
+       <summary>County Choropleth Maps of H3 Hexagonal Grids (from previous step!)</summary>
     
     <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Apache _County.png" width="200" height="200" /> 
     <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Cochise _County.png" width="200" height="200" /> 
