@@ -19,8 +19,9 @@ cable <- read_csv("bdc_04_Cable_fixed_broadband_D23_14may2024.csv")
 # BIND ALL ROWS
 fcc <- bind_rows(cable, copper, fiber, GSO_sat, LBR_FW, L_FW, NGSO_sat, other, Un_FW)
 ```
+
 <details>
-  <summary>TEST Drop Down Code</summary>
+<summary>TEST Drop Down Code</summary>
 ```
 # IMPORT FCC CSV FILES
 cable <- read_csv("bdc_04_Cable_fixed_broadband_D23_14may2024.csv")
