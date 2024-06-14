@@ -25,11 +25,11 @@ fcc <- bind_rows(cable, copper, fiber, GSO_sat, LBR_FW, L_FW, NGSO_sat, other, U
   
   ```
   print("Hello, world!")
-    ```
-  
+  ```
+
 </details>
 
 ---
-Last Edit: 🕔20:03
+Last Edit: 🕔20:08
 <p style="font-size:11px">Page template forked from <a href="https://github.com/evanca/quick-portfolio">evanca</a></p>
 <!-- Remove above link if you don't want to attibute -->
