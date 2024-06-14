@@ -25,7 +25,7 @@ fcc <- bind_rows(cable, copper, fiber, GSO_sat, LBR_FW, L_FW, NGSO_sat, other, U
 <br>
 <code>
 function <- test
-<code>
+</code>
 </details>
 
 ---
