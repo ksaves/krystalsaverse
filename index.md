@@ -10,7 +10,7 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
 
 <img src="images/Map_Of_Percentage_Of_Served_Locations_BY_County.png" width="200" height="200" /> <img src="images/Map_Of_Percentage_Of_Served_Locations_BY_BlockGroup.png" width="200" height="200"/> <img src="images/Map_Of_Percentage_Of_Served_Locations_BY_Block.png" width="200" height="200"/> <img src="images/Map_Of_Percentage_Of_Served_Locations_BY_H3_Hexagonal_Grid.png" width="200" height="200"/>
 
-<sub>Download R Code here [broadband_availability_data_in_R.pdf](https://github.com/ksaves/krystalsaverse.github.io/blob/master/pdf/broadband_availability_data_in_R.pdf)</sub>
+<sub>Download R Code here [broadband_availability_data_in_R.pdf](https://github.com/ksaves/krystalsaverse.github.io/blob/master/broadband_availability_data_in_R.R)</sub>
 
 
 ```r
