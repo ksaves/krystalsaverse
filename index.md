@@ -549,7 +549,6 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
 
    <details>
        <summary>County Choropleth Maps of H3 Hexagonal Grids (from previous step!)</summary>
-    
     <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Apache _County.png" width="200" height="200" /> 
     <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Cochise _County.png" width="200" height="200" /> 
     <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Coconino _County.png" width="200" height="200" /> 
@@ -564,7 +563,6 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Pinal _County.png" width="200" height="200" /> 
     <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Santa Cruz _County.png" width="200" height="200" /> 
     <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Yavapai _County.png" width="200" height="200" />
-    
     </details>   
     
 </details>
@@ -581,6 +579,33 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
 
 ---
 
+```
+## Step 3, Add field "YEAR" to MO_Census_Data & calculate
+
+# Retrieve variables from getRailInfo() module
+cws = sav.getCensusFieldInfo()
+mofcs = []
+
+# Walk through files
+walk = arcpy.da.Walk(cws, datatype="FeatureClass")
+for dirpath, dirnames, filenames in walk:
+    for filename in filenames:
+        if filename.endswith("_shp"):
+            mofcs.append(os.path.join(dirpath, filename))
+
+# Execute AddField            
+for entry in mofcs:
+    arcpy.management.AddField(entry, "YEAR", "TEXT")
+
+# Split file text to retrieve year
+for entry in mofcs:
+    x = entry.split("\\")[1]
+    xx = entry.split("_")[1]
+    output = int(xx)
+
+# Execute CalculateField with retrieved year    
+    arcpy.management.CalculateField(entry, "YEAR", output, "PYTHON3")
+```
 
 
 
