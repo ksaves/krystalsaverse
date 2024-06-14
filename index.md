@@ -12,12 +12,8 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
 
 <sub>Download R Code here [broadband_availability_data_in_R.R](https://github.com/ksaves/krystalsaverse.github.io/blob/master/broadband_availability_data_in_R.R)</sub>
 
-
+Example below:
 ```r
-    #####################################################
-    # 4. DETERMINE LOCATION STATUS (I.E., UNSERVED, UNDERSERVED, SERVED) (See BEAD NOFO, pages 16-17)
-    #####################################################
-    
     # DETERMINE LOCATION STATUS
     fcc_bsl_status <- fcc %>%
       mutate(num_status = if_else(low_latency == 0 | 
