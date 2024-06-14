@@ -38,12 +38,12 @@ fcc_bsl_status <- fcc %>%
 ```
 <details>
 <summary>View County Maps (R Output)</summary>
-      
+<br>
 <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Apache _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Cochise _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Coconino _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Gila _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Graham _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Greenlee _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ La Paz _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Maricopa _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Mohave _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Navajo _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Pima _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Pinal _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Santa Cruz _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Yavapai _County.png" width="200" height="200" />
       
 </details>
 
 ---
-Last Edit: 🕔21:01
+Last Edit: 🕔21:31
 <p style="font-size:11px">Page template forked from <a href="https://github.com/evanca/quick-portfolio">evanca</a></p>
 <!-- Remove above link if you don't want to attibute -->
