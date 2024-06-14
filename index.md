@@ -22,14 +22,14 @@ fcc <- bind_rows(cable, copper, fiber, GSO_sat, LBR_FW, L_FW, NGSO_sat, other, U
 
 <details>
   <summary>There's code inside this dropdown...</summary>
-  <br>
-
-    ```javascript
-    console.log("Hello, world!");
+  
+    ```python
+    print("Hello, world!")
     ```
+  
 </details>
 
 ---
-Last Edit: 🕔19:52
+Last Edit: 🕔20:00
 <p style="font-size:11px">Page template forked from <a href="https://github.com/evanca/quick-portfolio">evanca</a></p>
 <!-- Remove above link if you don't want to attibute -->
