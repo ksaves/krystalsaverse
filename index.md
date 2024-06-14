@@ -13,10 +13,10 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
 <sub>Download R Code here [broadband_availability_data_in_R.pdf](https://github.com/ksaves/krystalsaverse.github.io/blob/master/pdf/broadband_availability_data_in_R.pdf)</sub>
 
 <details open>
-  <summary><h2>See R Code Here!<h2></summary>
+  <summary><h4>See R Code Here!<h4></summary>
     
   - <details>
-    <summary>Introduction</summary>
+    <summary><h5>Introduction</h5></summary>
    
     ```
     # IMPORT FCC CSV FILES
