@@ -15,7 +15,7 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
 <details>
   <summary><h5>See R Code Here!<h5></summary>
     
-  - <details>
+   <details>
     <summary>Introduction</summary>
    
     ```r
@@ -59,7 +59,7 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     ```
     </details>
     
-  - <details>
+   <details>
     <summary>1. Import FCC Broadband Availability Data</summary>
     
     ```r
@@ -106,7 +106,7 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     ```
     </details>
 
-  - <details>
+   <details>
     <summary>2. Combine FCC Technology</summary>
 
     ```r
@@ -124,7 +124,7 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     ```
     </details>
 
-  - <details>
+   <details>
     <summary>3. Explore Dataset</summary>
 
     ```r
@@ -149,7 +149,7 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     ```
     </details>
 
-  - <details>
+   <details>
     <summary>4. Determine Location Status (i.e., unserved, underserved, served)</summary>
 
     ```r
@@ -185,7 +185,7 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     ```
     </details>
     
-  - <details>
+   <details>
     <summary>5. Count Locations and Status Per Census Geometry</summary>
 
     ```r
@@ -262,7 +262,7 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     ```
     </details>
     
-  - <details>
+   <details>
     <summary>6. Export Data</summary>
 
     ```r
@@ -282,7 +282,7 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     ```
     </details>
 
-  - <details>
+   <details>
     <summary>7. Create Choropleth Maps Using 'ggplot2'</summary>
 
     ```r
@@ -378,7 +378,7 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     ```
     </details>
     
-  - <details>
+   <details>
     <summary>8. Count Locations and Status Per H3 Hexagonal Grid</summary>
 
     ```r
@@ -427,7 +427,7 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     ```
     </details>
 
-  - <details>
+   <details>
     <summary>9. Create Choropleth Maps of H3 Hexagonal Bins Using 'ggplot2'</summary>
 
     ```r
@@ -500,7 +500,7 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     ```
     </details>
 
-  - <details>
+   <details>
     <summary>10. Map the Percentage of Served Locations Per H3 for All Counties</summary>
 
     ```r
@@ -547,10 +547,24 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     ```
     </details>
 
-  - <details>
+   <details>
     <summary>County Choropleth Maps of H3 Hexagonal Grids (from previous step!)</summary>
     
-    <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Apache _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Cochise _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Coconino _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Gila _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Graham _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Greenlee _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ La Paz _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Maricopa _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Mohave _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Navajo _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Pima _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Pinal _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Santa Cruz _County.png" width="200" height="200" /> <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Yavapai _County.png" width="200" height="200" />
+    <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Apache _County.png" width="200" height="200" /> 
+    <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Cochise _County.png" width="200" height="200" /> 
+    <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Coconino _County.png" width="200" height="200" /> 
+    <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Gila _County.png" width="200" height="200" /> 
+    <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Graham _County.png" width="200" height="200" /> 
+    <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Greenlee _County.png" width="200" height="200" /> 
+    <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ La Paz _County.png" width="200" height="200" /> 
+    <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Maricopa _County.png" width="200" height="200" /> 
+    <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Mohave _County.png" width="200" height="200" /> 
+    <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Navajo _County.png" width="200" height="200" /> 
+    img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Pima _County.png" width="200" height="200" /> 
+    <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Pinal _County.png" width="200" height="200" /> 
+    <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Santa Cruz _County.png" width="200" height="200" /> 
+    <img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Yavapai _County.png" width="200" height="200" />
+    
     </details>   
     
 </details>
