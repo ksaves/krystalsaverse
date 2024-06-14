@@ -43,7 +43,9 @@ fcc_bsl_status <- fcc %>%
       
 </details>
 
+<br><br>
 ---
+<br><br>
 
 ## Walksheds and Bikesheds to Career Centers in Phoenix, Arizona
 
