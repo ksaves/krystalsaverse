@@ -13,12 +13,16 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
 <sub>Download R Code here [broadband_availability_data_in_R.pdf](https://github.com/ksaves/krystalsaverse.github.io/blob/master/pdf/broadband_availability_data_in_R.pdf)</sub>
 
 
+```r
+# IMPORT FCC CSV FILES
+cable <- read_csv("bdc_04_Cable_fixed_broadband_D23_14may2024.csv")
+# BIND ALL ROWS
+fcc <- bind_rows(cable, copper, fiber, GSO_sat, LBR_FW, L_FW, NGSO_sat, other, Un_FW)
+```
+# TEST
 ```js
 # IMPORT FCC CSV FILES
 cable <- read_csv("bdc_04_Cable_fixed_broadband_D23_14may2024.csv")
-```
-# TEST
-```javascript
 # BIND ALL ROWS
 fcc <- bind_rows(cable, copper, fiber, GSO_sat, LBR_FW, L_FW, NGSO_sat, other, Un_FW)
 ```
