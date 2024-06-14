@@ -21,11 +21,11 @@ fcc <- bind_rows(cable, copper, fiber, GSO_sat, LBR_FW, L_FW, NGSO_sat, other, U
 ```
 
 <details>
-<summary>Example: Code inside dropdown</summary>
-<br>
-<code>
-function <- test
-</code>
+  <summary>Example: Code inside dropdown</summary>
+  
+    ```r
+    function <- test
+    ```
 </details>
 
 ---
