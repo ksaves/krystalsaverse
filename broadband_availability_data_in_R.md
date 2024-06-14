@@ -8,6 +8,10 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
 
 The [_ggplot2_](https://ggplot2.tidyverse.org/) package is used to map the percentage of served locations within a particular Census or H3 geometry. 
 
+<img src="images/Map_Of_Percentage_Of_Served_Locations_BY_County.png" width="200" height="200" /> <img src="images/Map_Of_Percentage_Of_Served_Locations_BY_BlockGroup.png" width="200" height="200"/> <img src="images/Map_Of_Percentage_Of_Served_Locations_BY_Block.png" width="200" height="200"/> <img src="images/Map_Of_Percentage_Of_Served_Locations_BY_H3_Hexagonal_Grid.png" width="200" height="200"/>
+
+<sub>Download R Code here [broadband_availability_data_in_R.R](https://github.com/ksaves/krystalsaverse.github.io/blob/master/broadband_availability_data_in_R.R)</sub>
+<br>
 
 <details open>
 <summary><h4>This analysis is broken into the following sections:</h4></summary>
@@ -28,6 +32,12 @@ The [_ggplot2_](https://ggplot2.tidyverse.org/) package is used to map the perce
 
 #### 1. Import the FCC Broadband Availability Data
 
+First, download and save the broadband availaility data from the FCC National Broadband Map.
+  * Go to the [FCC National Broadband Map](https://broadbandmap.fcc.gov/data-download)
+  * In the FCC portal, select State, and download all fixed technologies
+  * Unzip files
+
+
 ```r
 # INSTALL PACKAGES
 install.packages("dplyr", "tidyr", "readr")
@@ -41,16 +51,7 @@ library(readr)
 ?readr
 ?dplyr
 ?tidyr
-```
 
-<details open>
-<summary><h4>Download FCC Broadband Availability Data:<h4></summary>
-<ul><li>Go to the [FCC National Broadband Map](https://broadbandmap.fcc.gov/data-download)</li>
-<li>In the FCC portal, Select State, and download all fixed technologies.</li>
-<li>Unzip files</li></ul>
-</details>
-
-```r
 # PRINT CURRENT WORKING DIRECTORY
 getwd()
 
@@ -190,8 +191,7 @@ counties_summary <- fcc_bsl_status %>%
          perc_underserved = round(count_underserved/(count_unserved + count_underserved + count_served) *100),
          perc_not_served = round((count_unserved + count_underserved) / (count_unserved + count_underserved + count_served) *100),
          perc_served = round(count_served/(count_unserved + count_underserved + count_served) *100)) 
-```
-```r
+
 # COUNT LOCATION AND STATUS PER BLOCK GROUP
 block_groups_summary <- fcc_bsl_status %>%
   mutate(geoid = substr(block_geoid, start = 1, stop = 12)) %>%
@@ -275,6 +275,9 @@ ggsave("Map_of_Percentage_of_Served_Locations_by_County.png",
        units = "in",
        dpi = 600)
 ```
+
+<img src="images/Map_Of_Percentage_Of_Served_Locations_BY_County.png" width="300" height="300" />
+
 ```r
 # MAP PERCENTAGE OF SERVED LOCATIONS BY BLOCK GROUP
 left_join(block_groups, block_groups_summary, join_by(GEOID == geoid)) %>% 
@@ -302,6 +305,8 @@ ggsave("Map_of_Percentage_of_Served_Locations_by_BlockGroup.png",
        units = "in",
        dpi = 600)
 ```
+<img src="images/Map_Of_Percentage_Of_Served_Locations_BY_BlockGroup.png" width="300" height="300"/>
+
 ```r
 # MAP PERCENTAGE OF SERVED LOCATIONS BY BLOCK
 left_join(blocks, blocks_summary, join_by(GEOID20 == block_geoid)) %>% 
@@ -329,13 +334,164 @@ ggsave("Map_of_Percentage_of_Served_Locations_by_Block.png",
        units = "in",
        dpi = 600)
 ```
+<img src="images/Map_Of_Percentage_Of_Served_Locations_BY_Block.png" width="300" height="300"/>
+
 <br>
 
 ---
 
 #### 8. Count Locations and Status per H3 Hexagonal Grid
+```r
+# INSTALL PACKAGE
+install.packages("h3jsr", "sf")
 
+# LOAD PACKAGE
+library(h3jsr)
+library(sf)
 
+# VIEW PACKAGE HELP
+?h3jsr
+?sf
+
+# GET STATE GEOMETRY (DEFAULT CRS IS EPSG: 4269)
+state <- states(year = 2023) %>%
+  filter(NAME == "Arizona")
+
+# GET LIST OF H3 CELLS IN STATE (DEFAULT CRS TAKEN FROM INPUT SF GEOMETRY)
+h3_ids <- polygon_to_cells(geometry = state, res = 8, simple = FALSE) # CREATES A SINGLE POLYGON OF ALL CELLS
+
+# CONVERT LIST OF CELLS TO POLYGONS (DEFAULT IS EPSG:4326)
+h3 <- cell_to_polygon(unlist(h3_ids$h3_addresses), simple = FALSE) # CREATES MULTIPLE POLYGONS OF ALL CELLS
+
+# CONVERT COORDINATE REFRENCE SYSTEM TO EPSG: 4269
+h3 <- st_transform(h3, 4269)
+st_crs(h3)
+
+# COUNT LOCATIONS AND STATUS PER HEX BIN
+h3_summary <- fcc_bsl_status %>%
+  left_join(h3, join_by(h3_res8_id == h3_address), multiple = "all") %>%
+  group_by(h3_res8_id, status) %>% 
+  summarise(count = n()) %>%
+  pivot_wider(names_from = status, names_prefix = "count_", values_from = count, values_fill = 0) %>%
+  mutate(perc_unserved = round(count_unserved/(count_unserved + count_underserved + count_served) *100),
+         perc_underserved = round(count_underserved/(count_unserved + count_underserved + count_served) *100),
+         perc_not_served = round((count_unserved + count_underserved) / (count_unserved + count_underserved + count_served) *100),
+         perc_served = round(count_served/(count_unserved + count_underserved + count_served) *100))
+
+# OPTIONAL: EXPORT TABLE TO CSV
+write_csv(h3_summary, "h3_summary_bdc_fixed_broadband_Dec23_updated14may2024_out05302024.csv")
+```
+<br>
+
+---
 
 #### 9. Create Choropleth Maps of H3 Status Using _ggplot2_
+```r
+# MAP PERCENTAGE OF SERVED LOCATIONS BY H3
+left_join(h3, h3_summary, join_by(h3_address == h3_res8_id)) %>% 
+  ggplot() +
+  geom_sf(mapping = aes(geometry = geometry, fill = perc_served), color = NA) +
+  #geom_sf(data = counties, mapping = aes(geometry = geometry), fill = NA, linewidth = 0.5) + # OPTIONAL: ADD COUNTY BOUNDARIES
+  scale_fill_distiller(type = "seq",
+                       palette = "Blues",
+                       direction = 1,
+                       na.value = "grey") + 
+  labs(title = "Percentage of Served Locations by H3 Hexagonal Grid",
+       caption = "Note to reader: NA values shown in grey \nData Source: FCC Broadband Data Collection (31 Dec 2023)",
+       fill = "Percentage") + 
+  theme_void() + 
+  theme(plot.background = element_rect(fill = "white", color = NA),
+        plot.margin = margin(0.5, 0.5, 0.5, 0.5, "in"),
+        plot.title = element_text(hjust = 0.5, vjust = 0.5),
+        plot.caption = element_text(hjust = 0.5, vjust = 0.5))
+
+# OPTIONAL: SAVE MAP AS PNG
+ggsave("Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid.png",
+       plot = last_plot(),
+       width = 6,
+       height = 6,
+       units = "in",
+       dpi = 600)
+```
+<img src="images/Map_Of_Percentage_Of_Served_Locations_BY_H3_Hexagonal_Grid.png" width="300" height="300"/>
+
+Note: Notice the output is difficult to interpret. Alternatively, we can map the percentage of served locations at the county level for easier viewing. 
+
+```r
+# FILTER COUNTY OF INTEREST
+county_of_interest <- counties %>%
+  filter(NAME == "Maricopa") # ENTER COUNTY NAME HERE
+
+# GET LIST OF H3 CELLS IN STATE (DEFAULT IS EPSG:4326)
+county_h3_ids <- polygon_to_cells(geometry = county_of_interest, res = 8, simple = FALSE)
+
+# CONVERT LIST OF CELLS TO POLYGONS
+county_h3 <- cell_to_polygon(unlist(county_h3_ids$h3_addresses), simple = FALSE)
+
+# CONVERT COORDINATE REFRENCE SYSTEM TO EPSG: 4269
+county_h3 <- st_transform(county_h3, 4269)
+
+# COUNT LOCATIONS AND STATUS PER HEX BIN
+left_join(county_h3, h3_summary, join_by(h3_address == h3_res8_id)) %>% 
+  ggplot() + 
+  geom_sf(mapping = aes(geometry = geometry, fill = perc_served), color = NA) +
+  scale_fill_distiller(type = "seq",
+                       palette = "Blues",
+                       direction = 1,
+                       na.value = "grey") + 
+  labs(title = paste("Percentage of Served Locations by H3 Hexagonal Grid \n", county_of_interest$NAME, "County"),
+       caption = "Note to reader: NA values shown in grey \nData Source: FCC Broadband Data Collection (Dec 2023)",
+       fill = "Percentage") + 
+  theme_void() + 
+  theme(plot.background = element_rect(fill = "white", color = NA),
+        plot.margin = margin(0.5, 0.5, 0.5, 0.5, "in"),
+        plot.title = element_text(hjust = 0.5, vjust = 0.5),
+        plot.caption = element_text(hjust = 0.5, vjust = 0.5))
+```
+<img src="images/Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_ Maricopa _County.png" width="300" height="300"/>
+
+Note: Manually creating a map for each county may be very time consuming. Instead, we can use a _for loop_ to create maps for each county. 
+<br>
+
+---
+
 #### 10. Map the Percentage of Served Locations per H3 for all Counties
+```r
+# CREATE EMPTY VECTORS
+county_of_interest <- 1
+county_h3_ids <- 1
+county_h3 <- 1
+
+# FOR LOOP ITERATES FOR EACH COUNTY
+for (i in 1:nrow(counties)) {
+  county_of_interest <- counties[i,]
+  county_h3_ids <- polygon_to_cells(geometry = county_of_interest, res = 8, simple = FALSE) 
+  county_h3 <- cell_to_polygon(unlist(county_h3_ids$h3_addresses), simple = FALSE)
+  county_h3 <- st_transform(county_h3, 4269)
+  left_join(county_h3, h3_summary, join_by(h3_address == h3_res8_id)) %>%     
+    ggplot() + 
+    geom_sf(mapping = aes(geometry = geometry, fill = perc_served), color = NA) +
+    scale_fill_distiller(type = "seq",
+                         palette = "Blues",
+                         direction = 1,
+                         na.value = "grey") + 
+    labs(title = paste("Percentage of Served Locations by H3 Hexagonal Grid \n", county_of_interest$NAME, "County"),
+         caption = "Note to reader: NA values shown in grey \nData Source: FCC Broadband Data Collection (31 Dec 2023)",
+         fill = "Percentage") + 
+    theme_void() + 
+    theme(plot.background = element_rect(fill = "white", color = NA),
+          plot.margin = margin(0.5, 0.5, 0.5, 0.5, "in"),
+          plot.title = element_text(hjust = 0.5, vjust = 0.5),
+          plot.caption = element_text(hjust = 0.5, vjust = 0.5))
+  ggsave(paste("Map_of_Percentage_of_Served_Locations_by_H3_Hexagonal_Grid_", county_of_interest$NAME, "_County.png", sep = ""),
+         plot = last_plot(),
+         width = 6,
+         height = 6,
+         units = "in",
+         dpi = 600)
+}
+
+# CHECK WORKING DIRECTORY FOLDER FOR SAVED COUNTY PLOTS
+getwd()
+```
+
