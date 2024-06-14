@@ -5,14 +5,12 @@ The following code uses FCC broadband availability data to determine the status 
 Arizona is the primary state of analysis, however, this code can be used for any state with Census and BDC data!
 Sections of the code where these changes can be made have been annotated. 
 
-The _dyplr_ and _tidyr_ packages are used to summarize the total number of unserved, underserved, and served locations within a particular geometry. 
-The FCC Broadband Availability data is publicly available and can be downloaded here [broadbandmap.fcc.gov](https://broadband.fcc.gov). 
-The dataset does not contain latitude/longitude information and cannot be mapped at the household level without a CostQuest license. 
-Instead, this analysis uses the H3 Hexagonal Grid and Census Block information included in the publicly available data. 
-The _tigris_ package is used to directly download and use U.S. Census Bureau TIGER/Line spatial features (i.e., blocks, block groups, and counties). T
-he _h3jsr_ package is used to create H3 Hexagonal Grids covering the entire state of Arizona. 
+The following code uses FCC Broadband Availability Data to determine the status (i.e., unserved, underserved, served) of broadband servicable locations (BSL). Arizona is the primary state for this analysis, however, this code can be used for any state!
 
-The _ggplot2_ package is used to map the percentage of served locations within a particular Census or H3 geometry. 
+The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyverse.org/) packages are used to summarize the total number of unserved, underserved, and served locations within a particular geometry. The FCC Broadband Availability data is publicly available and can be downloaded at [_broadbandmap.fcc.gov_](https://broadband.fcc.gov). The dataset does not contain latitude/longitude information and cannot be mapped at the household level without a [CostQuest](https://www.costquest.com/resources/articles/broadband-policy/fcc-fabric-license-available-for-academic-broadband-research/) license. Instead, this analysis uses the H3 Hexagonal Grid and Census Block information included in the publicly available data. The [_tigris_](https://github.com/walkerke/tigris) package is used to directly download and use U.S. Census Bureau [TIGER/Line](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html) spatial features (i.e., blocks, block groups, and counties). The [_h3jsr_](https://obrl-soil.github.io/h3jsr/) package is used to create [H3](https://h3geo.org/docs/core-library/overview/) Hexagonal Grids covering the entire state of Arizona. 
+
+The [_ggplot2_](https://ggplot2.tidyverse.org/) package is used to map the percentage of served locations within a particular Census or H3 geometry. 
+
 
 <details open>
 <summary>Sections:</summary>
