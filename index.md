@@ -15,19 +15,19 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
 <details open>
   <summary><h4>See R Code Here!</h4>
     
-  - <details>
+   <details>
     <summary><h5>Introduction</h5></summary>
    
-    ```
+    ```javascript
     # IMPORT FCC CSV FILES
     cable <- read_csv("bdc_04_Cable_fixed_broadband_D23_14may2024.csv")
     ```
     </details>
 
-  - <details>
+   <details>
     <summary>2. Combine FCC Technology</summary>
 
-    ```r
+    ```javascript
     # BIND ALL ROWS
     fcc <- bind_rows(cable, copper, fiber, GSO_sat, LBR_FW, 
                      L_FW, NGSO_sat, other, Un_FW)
