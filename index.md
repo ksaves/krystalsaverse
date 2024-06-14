@@ -12,9 +12,10 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
 
 <sub>Download R Code here [broadband_availability_data_in_R.pdf](https://github.com/ksaves/krystalsaverse.github.io/blob/master/pdf/broadband_availability_data_in_R.pdf)</sub>
 <br><br>
+
 <details>
     <summary><h5>See R Code Here!<h5></summary>
-    
+        
    <details>
     <summary>Introduction</summary>
        
@@ -57,11 +58,11 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     # 9. CREATE CHOROPLETH MAPS OF HEX STATUS USING 'GGPLOT2'
     # 10. MAP PERCENTAGE OF SERVED LOCATIONS IN H3 FOR ALL COUNTIES
     ```
-    </details>
+</details>
     
    <details>
        <summary>1. Import FCC Broadband Availability Data</summary>
-    
+       
     ```
     #####################################################
     # 1. IMPORT FCC BROADBAND AVAILABILITY DATA
@@ -104,7 +105,7 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
     other <- read_csv("bdc_04_Other_fixed_broadband_D23_14may2024.csv")
     Un_FW <- read_csv("bdc_04_UnlicensedFixedWireless_fixed_broadband_D23_14may2024.csv")
     ```
-    </details>
+</details>
 
    <details>
        <summary>2. Combine FCC Technology</summary>
