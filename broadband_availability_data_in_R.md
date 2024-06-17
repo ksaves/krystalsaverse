@@ -21,9 +21,9 @@ The [_ggplot2_](https://ggplot2.tidyverse.org/) package is used to map the perce
   <li>4. Determine Location Status (i.e., unserved, underserved, served)</li>
   <li>5. Count Locations and Status per Census Geometry</li>
   <li>6. Optional: Export Table Data</li>
-  <li>7. Create Choropleth Maps Using _ggplot2_</li>
+  <li>7. Create Choropleth Maps Using 'ggplot2'</li>
   <li>8. Count Locations and Status per H3 Hexagonal Grid</li>
-  <li>9. Create Choropleth Maps of H3 Status Using _ggplot2_</li>
+  <li>9. Create Choropleth Maps of H3 Status Using 'ggplot2'</li>
   <li>10. Map the Percentage of Served Locations per H3 for all Counties</li></ul>
 </details>
 <br>
