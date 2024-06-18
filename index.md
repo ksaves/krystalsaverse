@@ -10,7 +10,7 @@ The [_dyplr_](https://dplyr.tidyverse.org/) and [_tidyr_](https://tidyr.tidyvers
 
 <img src="images/Map_Of_Percentage_Of_Served_Locations_BY_County.png" width="200" height="200" /> <img src="images/Map_Of_Percentage_Of_Served_Locations_BY_BlockGroup.png" width="200" height="200"/> <img src="images/Map_Of_Percentage_Of_Served_Locations_BY_Block.png" width="200" height="200"/> <img src="images/Map_Of_Percentage_Of_Served_Locations_BY_H3_Hexagonal_Grid.png" width="200" height="200"/>
 
-View R Code here! [broadband_availability_data_in_R.R](https://github.com/ksaves/krystalsaverse/blob/master/broadband_availability_data_in_R.md)
+View R Code here! [broadband_availability_data_in_R.md](https://github.com/ksaves/krystalsaverse/blob/master/broadband_availability_data_in_R.md)
 
 Example below:
 
@@ -21,20 +21,20 @@ fcc_bsl_status <- fcc %>%
                                 max_advertised_download_speed < 25 | 
                                 max_advertised_upload_speed < 3 |
                                 technology %in% c(0, 60, 61, 70), 0, # UNSERVED
-                            if_else(low_latency == 1 & 
-                                    (between(max_advertised_download_speed, 25, 99) | 
-                                     between(max_advertised_upload_speed, 3, 19)) &
-                                     technology %in% c(10, 40, 50, 71, 72), 1, # UNDERSERVED
-                             if_else(low_latency == 1 & 
-                                     max_advertised_download_speed >= 100 & 
-                                     max_advertised_upload_speed >= 20 &
-                                     technology %in% c(10, 40, 50, 71, 72), 2, NA)))) %>% # SERVED
+                        if_else(low_latency == 1 & 
+                                (between(max_advertised_download_speed, 25, 99) | 
+                                between(max_advertised_upload_speed, 3, 19)) &
+                                technology %in% c(10, 40, 50, 71, 72), 1, # UNDERSERVED
+                        if_else(low_latency == 1 & 
+                                max_advertised_download_speed >= 100 & 
+                                max_advertised_upload_speed >= 20 &
+                                technology %in% c(10, 40, 50, 71, 72), 2, NA)))) %>% # SERVED
       group_by(location_id, block_geoid, h3_res8_id) %>%
       summarise(status = as.character(max(num_status))) %>%
       ungroup() %>%
       mutate(status = if_else(status == 0, "unserved", 
-                              if_else(status == 1, "underserved",
-                              if_else(status == 2, "served", NA))))
+                      if_else(status == 1, "underserved",
+                      if_else(status == 2, "served", NA))))
 ```
 <details>
 <summary>View County Maps (R Output)</summary>
