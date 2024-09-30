@@ -58,7 +58,11 @@ Exploring 5, 10, 15 minute walksheds and bikesheds to Career Centers in Phoenix,
 <sub>Check out the [ArcGIS StoryMap](https://storymaps.arcgis.com/stories/1b23c0736c6140bebdc5611bc529a1d4)</sub>
 
 
+---
 
+## Pedestrian/Vehicle Accidents in Columbia, Missouri
+
+(https://geography.missouri.edu/news/brown-bag-lecture-campuspedestrian-vehicle-accidents-held-zoom-wed-may-12)
 
 
 
