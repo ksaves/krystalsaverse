@@ -42,7 +42,7 @@
 #####################################################
 
 # INSTALL PACKAGES
-install.packages("dplyr", "tidyr", "readr")
+install.packages(c("dplyr", "tidyr", "readr"))
 
 # LOAD PACKAGES
 library(dplyr)
@@ -326,7 +326,7 @@ ggsave("Map_of_Percentage_of_Served_Locations_by_Block.png",
 #####################################################
 
 # INSTALL PACKAGE
-install.packages("h3jsr", "sf")
+install.packages(c("h3jsr", "sf"))
 
 # LOAD PACKAGE
 library(h3jsr)
@@ -473,4 +473,5 @@ for (i in 1:nrow(counties)) {
 
 # CHECK WORKING DIRECTORY FOLDER FOR SAVED COUNTY PLOTS
 getwd()
+
 
