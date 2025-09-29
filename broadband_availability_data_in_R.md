@@ -40,7 +40,7 @@ First, download and save the broadband availaility data from the FCC National Br
 
 ```r
 # INSTALL PACKAGES
-install.packages("dplyr", "tidyr", "readr")
+install.packages(c("dplyr", "tidyr", "readr"))
 
 # LOAD PACKAGES
 library(dplyr)
@@ -343,7 +343,7 @@ ggsave("Map_of_Percentage_of_Served_Locations_by_Block.png",
 #### 8. Count Locations and Status per H3 Hexagonal Grid
 ```r
 # INSTALL PACKAGE
-install.packages("h3jsr", "sf")
+install.packages(c("h3jsr", "sf"))
 
 # LOAD PACKAGE
 library(h3jsr)
